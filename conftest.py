@@ -4,7 +4,6 @@ from news.models import News, Comment
 
 
 @pytest.fixture
-# Используем встроенную фикстуру для модели пользователей django_user_model.
 def author(django_user_model):
     return django_user_model.objects.create(username='Автор')
 
