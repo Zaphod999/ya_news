@@ -53,11 +53,11 @@ def test_comments_availability_for_author(author_client, name, args):
     )
 )
 def test_comments_redirect_for_anonimous_user(client, name, args):
-
-    """ При попытке перейти на страницу редактирования и удаления
+    """
+    При попытке перейти на страницу редактирования и удаления
     комментариев анонимный пользователь
-    перенаправляется на страницу авторизации """
-
+    перенаправляется на страницу авторизации
+    """
     login_url = reverse('users:login')
     url = reverse(name, args=args)
     response = client.get(url)

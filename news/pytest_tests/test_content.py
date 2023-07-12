@@ -1,8 +1,6 @@
 import pytest
 
 from django.urls import reverse
-# from http import HTTPStatus
-# from pytest_django.asserts import assertRedirects
 from django.conf import settings
 from datetime import datetime, timedelta
 from django.utils import timezone

@@ -41,3 +41,10 @@ def comment_sample(author, news_sample):
 @pytest.fixture
 def id_for_comment(comment_sample):
     return comment_sample.id,
+
+
+@pytest.fixture
+def form_data():
+    return {
+        'text': 'Однажды в студёную зимнюю пору',
+    }
