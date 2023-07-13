@@ -1,8 +1,8 @@
 import pytest
 
-from django.urls import reverse
-from django.conf import settings
 from datetime import datetime, timedelta
+from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 from news.models import News, Comment
 

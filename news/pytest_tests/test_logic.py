@@ -1,16 +1,11 @@
-from pytest_django.asserts import assertRedirects
-
-from django.urls import reverse
-
-from news.models import Comment
-
-from news.forms import BAD_WORDS, WARNING
+import pytest
 
 from django.core.exceptions import ValidationError
-
+from django.urls import reverse
 from http import HTTPStatus
-
-import pytest
+from news.forms import BAD_WORDS, WARNING
+from news.models import Comment
+from pytest_django.asserts import assertRedirects
 
 
 def test_logged_in_user_can_create_comment(
