@@ -2,9 +2,12 @@ import pytest
 
 from django.core.exceptions import ValidationError
 from django.urls import reverse
+
 from http import HTTPStatus
+
 from news.forms import BAD_WORDS, WARNING
 from news.models import Comment
+
 from pytest_django.asserts import assertRedirects
 
 
