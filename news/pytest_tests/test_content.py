@@ -23,6 +23,9 @@ def news_list():
 
 @pytest.mark.django_db
 def test_news_count(client, news_list):
+    """
+    Количество новостей на главной странице — не более 10.
+    """
     url = reverse('news:home')
     response = client.get(url)
     object_list = response.context['object_list']
@@ -32,6 +35,10 @@ def test_news_count(client, news_list):
 
 @pytest.mark.django_db
 def test_news_order(client, news_list):
+    """
+    Новости отсортированы от самой свежей к самой старой.
+    Свежие новости в начале списка.
+    """
     url = reverse('news:home')
     response = client.get(url)
     object_list = response.context['object_list']
@@ -52,6 +59,10 @@ def comments_list(news_sample, author, id_for_args):
 
 
 def test_comments_order(author_client, comments_list, id_for_args):
+    """
+    Комментарии на странице отдельной новости отсортированы в
+    хронологическом порядке: старые в начале списка, новые — в конце.
+    """
     url = reverse('news:detail', args=id_for_args)
     response = author_client.get(url)
     news = response.context['news']
@@ -61,12 +72,20 @@ def test_comments_order(author_client, comments_list, id_for_args):
 
 @pytest.mark.django_db
 def test_anonymous_client_has_no_form(client, id_for_args):
+    """
+    Анонимному пользователю недоступна форма для отправки
+    комментария на странице отдельной новости.
+    """
     url = reverse('news:detail', args=id_for_args)
     response = client.get(url)
     assert 'form' not in response.context
 
 
 def test_logged_in_client_has_form(author_client, id_for_args):
+    """
+    Авторизованному пользователю доступна форма для
+    отправки комментария на странице отдельной новости.
+    """
     url = reverse('news:detail', args=id_for_args)
     response = author_client.get(url)
     assert 'form' in response.context

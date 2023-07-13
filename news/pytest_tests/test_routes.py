@@ -17,12 +17,12 @@ from pytest_django.asserts import assertRedirects
 )
 @pytest.mark.django_db
 def test_pages_availability_for_anonymous_user(client, name, args):
-
-    """ Главная страница, страница новости,
+    """
+    Главная страница, страница новости,
     страница регистрации пользователей
     и страницы входа в учетную запись и выхода из нее
-    доступны анонимным пользователям """
-
+    доступны анонимным пользователям
+    """
     url = reverse(name, args=args)
     response = client.get(url)
     assert response.status_code == HTTPStatus.OK
@@ -36,10 +36,10 @@ def test_pages_availability_for_anonymous_user(client, name, args):
     )
 )
 def test_comments_availability_for_author(author_client, name, args):
-
-    """ Страницы редактирования и удаления комментария
-    доступны автору комментария """
-
+    """
+    Страницы редактирования и удаления комментария
+    доступны автору комментария
+    """
     url = reverse(name, args=args)
     response = author_client.get(url)
     assert response.status_code == HTTPStatus.OK
@@ -73,6 +73,11 @@ def test_comments_redirect_for_anonimous_user(client, name, args):
     )
 )
 def test_404_erorr_for_not_author(admin_client, name, args):
+    """
+    Авторизованный пользователь не может зайти на страницы
+    редактирования или удаления чужих комментариев
+    (возвращается ошибка 404).
+    """
     url = reverse(name, args=args)
     response = admin_client.get(url)
     assert response.status_code == HTTPStatus.NOT_FOUND
